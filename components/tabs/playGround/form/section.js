@@ -22,9 +22,8 @@ const [name,setName]=useState(props.name)
        {name}
       </Text>
 
-      {props.data&&props.data.map((quatsion)=> <Quatsion quatsion={quatsion}></Quatsion>)}
-       <Quatsion></Quatsion>
-      <Quatsion></Quatsion>
+      {props.data&&props.data.map((quatsion,index)=> <Quatsion setAns={props.setAns} index={index} key={ index} quatsion={quatsion}></Quatsion>)}
+        
     </View>
   )
 }

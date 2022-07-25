@@ -1,20 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet,View,Text, TextInput } from 'react-native'
 
  
 const Quatsion = (props) => {
+   const [text, onChangeText] = useState('');
+ useEffect(()=>{
+       
+props.setAns((prev)=>{
+  const newArr=[...prev]
+  newArr[props.index]=text
+  return newArr
+})
+  //  props.setAns(prev=>{
+  //     const newArr=[...prev]
+  //     console.log('yes')
+  //   //   newArr[0]=text
+  //   //  return props.setAns(newArr) 
+  //   } )
+},[text])
+ 
   return (
     <View
       style={styles.container}
     >
-      <Text
+
+       <Text
         style={styles.text}
       >
        {props.quatsion?.c[0]?.v}
       </Text>
       <TextInput
-        multiline
-        placeholder={props.quatsion?.c[1]?.v}
+      onChangeText={onChangeText} value={text}
+         multiline
+        placeholder={props.quatsion?.c[1]?.v.toString()}
         style={styles.TextInput}
       ></TextInput>
     </View>

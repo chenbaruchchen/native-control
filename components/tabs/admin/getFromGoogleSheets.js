@@ -1,19 +1,20 @@
 
-import { StyleSheet, Text, View,Button,SectionList } from 'react-native';
+import { StyleSheet, Text, View,Button,ScrollView } from 'react-native';
 import React, { useState,useEffect } from "react";
 import Papa from "papaparse";
 
 import InputUi from '../../uiComponents/inputs'
 import saveFile from '../../fileSystem/saveFile';
 import * as FileSystem from 'expo-file-system';
+
+import { Alert } from '../../uiComponents/alert';
  export default function getFromGoogleSheets(props) {
 
 
     const [data, setData] = useState(null); 
     const [name,setName]=useState('') 
     const [text,setText]=useState(null) 
-  
-    useEffect(()=>{
+     useEffect(()=>{
         if (data) {
             console.log(data)
             setText(data.rows[0].c.toString())
@@ -48,18 +49,33 @@ import * as FileSystem from 'expo-file-system';
  
             function prepereForSave() {
                 const uri=  '/shelonim/'+name+Math.random()
-                 saveFile(uri,data)
+                 saveFile(uri,data) 
             }
     return (<View>
+ 
 <InputUi setInput={setName}/>
 <Button onPress={getFromGoogleSheetsData} title='get from google sheets'></Button>
 
 
- {text&&<><Text>{text}</Text>
- < Button  onPress={prepereForSave} title= {`save shelon as ${props.name}`}> </Button></>}
+ {text&& <DisplayData name={name} data={data} prepereForSave={prepereForSave} />}
 
- 
+
     </View>
       );
+}
+
+function DisplayData(props) {
+    return(<View>
+        {/* <Text>{props.data.row}</Text> */}
+
+<ScrollView style={{position:'absolute'}}>
+ 
+    < Button  onPress={props.prepereForSave} title= {`save shelon as ${props.name}`}> </Button>
+
+{props.data.rows?.map(q=>(<Text key={q.c[0].v} Text>{q.c[0].v}</Text>))}
+</ScrollView>
+
+
+    </View>)
 }
  

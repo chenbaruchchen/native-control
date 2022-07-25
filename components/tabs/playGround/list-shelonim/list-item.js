@@ -2,9 +2,25 @@ import React from 'react'
 import { StyleSheet,View, Text} from 'react-native'
  
 import { AntDesign } from '@expo/vector-icons'; 
-
+import deleteFile from '../../../fileSystem/deleteFile'
  
 const ListItem = (props) => {
+
+  function deleteContainerFunction() {
+
+    props.setShelonim((prev)=>{
+      const newArr=[...prev]
+
+      var index = array.indexOf(props.shelon);
+      if (index !== -1) {
+        array.splice(index, 1);
+      }
+
+      return newArr
+    })
+
+   deleteFile(`/shelonim/${props.shelon}`)
+  }
   return (
     <View
     onTouchEnd={()=> 
@@ -12,6 +28,9 @@ const ListItem = (props) => {
     }
       style={styles.container}
     >
+
+<AntDesign onPress={deleteContainerFunction} name="delete" size={24} color="black" />       
+
       <Text
         //   onPress={()=>console.log("props")}
 
@@ -20,7 +39,8 @@ const ListItem = (props) => {
        {props.shelon?props.shelon:'name of shelon'}
       </Text>
  
-      <AntDesign name="caretleft" size={24} color="black" />       
+      <AntDesign name="caretleft" size={24} color="black" />      
+ 
     </View>
   )
 }

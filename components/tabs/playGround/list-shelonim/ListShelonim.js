@@ -7,18 +7,15 @@ export default function Admin(props) {
     const [shelonim,setShelonim]=useState(null)
      useEffect(()=>{
         readDir('/shelonim').then((res)=>{
-            console.log(res)
-            setShelonim(res)
+             setShelonim(res)
         }).catch((err)=>console.error(err))
     },[])
     
     return (
         <SafeAreaView style={styles.container2}>
             <ScrollView>
-            {shelonim&&shelonim.map((shelon)=><ListItem key={shelon}  setShelon={props.setShelon} shelon={shelon}/>)}
- {shelonim&&shelonim.map((shelon)=><ListItem key={shelon}  setShelon={props.setShelon} shelon={shelon}/>)}
- {shelonim&&shelonim.map((shelon)=><ListItem key={shelon}  setShelon={props.setShelon} shelon={shelon}/>)}
- {shelonim&&shelonim.map((shelon)=><ListItem key={shelon}  setShelon={props.setShelon} shelon={shelon}/>)}
+            {shelonim&&shelonim.map((shelon)=><ListItem key={shelon} setShelonim={setShelonim}  setShelon={props.setShelon} shelon={shelon}/>)}
+ 
     
             </ScrollView>
  <Text >shelonim</Text>
