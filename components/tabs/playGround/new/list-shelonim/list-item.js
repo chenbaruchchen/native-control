@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet,View, Text} from 'react-native'
  
 import { AntDesign } from '@expo/vector-icons'; 
-import deleteFile from '../../../fileSystem/deleteFile'
+import deleteFile from '../../../../fileSystem/deleteFile'
  
 const ListItem = (props) => {
 

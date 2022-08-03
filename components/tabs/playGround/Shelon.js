@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
  import readFile from '../../fileSystem/readFile';
+ import { FontAwesome } from '@expo/vector-icons'; 
 
- import Form from './form/form'
+ import Form from './new/form/form'
+ import Old from './old/App';
 export default function Admin(props) {
     const [data,setData]=useState(null)
- useEffect(()=>{
+  useEffect(()=>{
  const uri='/shelonim/'+props.shelon
 readFile(uri).then((res)=>{
      
@@ -19,10 +21,13 @@ readFile(uri).then((res)=>{
 
             {/* {data&& <Text>{data} </Text>} */}
    <Text>{props.shelon} </Text>
-             
-        {data&&<Form name={props.shelon} data={data}/>}  
-    
-        </View>
+   <View style={{marginTop:20}}>
+<FontAwesome onPress={()=>props.setOpenOld(true)} style={{marginLeft:'auto',marginRight:'auto'}} name="history" size={24} color="black" />
+<Text style={{marginLeft:'auto',marginRight:'auto'}} onPress={()=>props.setOpenOld(true)}> טפסים קודמים </Text>
+</View>
+        {data&&<Form name={props.shelon} data={data}  />}  
+ 
+         </View>
       );
 }
 

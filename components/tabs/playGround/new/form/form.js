@@ -1,39 +1,43 @@
 import React, { useEffect, useState } from 'react'
 import {ScrollView, View,StyleSheet,Button} from 'react-native'
  import Section from './section'
- import saveFile  from '../../../fileSystem/saveFile'
+ import saveFile  from '../../../../fileSystem/saveFile'
 
-
-const Form = (props) => {
+ const Form = (props) => {
 
   const [ans,setAns]=useState([])
 
   function handleSave(data,name) {
 
+    const file={
+      data:data,
+      name:name
+    }
     //  const uri=`/tfasim/${name}/${data[0]}`
      const uri=`/tfasim/${name}&&${data[0]}`
-saveFile(uri,data).then((res)=>console.log(res))
+     console.log(uri)
+saveFile(uri,file).then((res)=>console.log(res))
 
    }
 
   return (
 
- <View style={{display:'flex',flexDirection:'column'}}>
+ <View style={{display:'flex',flexDirection:'column' }}>
 
       
 
     
     <ScrollView
-      style={{height:'85%'}}
+      style={{height:'80%',paddingBottom:80}}
     >
       <Section setAns={setAns} name={props.name} data={props.data}></Section>
 
      
 
-
+      <Button
+     onPress={()=>handleSave(ans,props.name)} title='form result '> </Button>
     </ScrollView>
-    <Button   style={{height:'15%'}}
-    onPress={()=>handleSave(ans,props.name)} title='form result '> </Button>
+ 
 
     </View>
   )

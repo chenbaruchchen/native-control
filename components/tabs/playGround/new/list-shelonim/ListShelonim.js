@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View,ScrollView,SafeAreaView} from 'react-native';
-import readDir from '../../../fileSystem/readDir'
+
+import { FontAwesome } from '@expo/vector-icons'; 
+
+import readDir from '../../../../fileSystem/readDir'
 
 import ListItem from './list-item';
 export default function Admin(props) {
@@ -13,7 +16,12 @@ export default function Admin(props) {
     
     return (
         <SafeAreaView style={styles.container2}>
-            <ScrollView>
+<View >
+<FontAwesome onPress={()=>props.setOpenOld(true)} style={{marginLeft:'auto',marginRight:'auto'}} name="history" size={24} color="black" />
+<Text onPress={()=>props.setOpenOld(true)}> טפסים קודמים </Text>
+</View>
+
+            <ScrollView style={{marginTop:25 }}>
             {shelonim&&shelonim.map((shelon)=><ListItem key={shelon} setShelonim={setShelonim}  setShelon={props.setShelon} shelon={shelon}/>)}
  
     
