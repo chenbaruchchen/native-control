@@ -1,41 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { Button, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import TabBar from './components/tab-bar';
-import Admin from './components/tabs/admin/admin';
-import PlayGround from './components/tabs/playGround/playGround';
-
- import { useState } from 'react';
-export default function App() {
-  const [tab,setTab]=useState('playGround')
-  return (
-    <View style={styles.container}>
-
- <View style={styles.body}>
-  {tab==='playGround'?<PlayGround/>:<Admin/>}
- </View>
-        <TabBar setTab={setTab}/>
- 
-    </View>
+import Home from './components/tabs/playGround/playGround'
+import Setting from './components/tabs/admin/admin'
+function HomeScreen({ navigation }) {
+  return (<Home/>
+     
   );
 }
 
-const styles = StyleSheet.create(
-  {
-  container: {
-    
-    backgroundColor: '#fff',
-    alignItems: 'center',
-   
-     
-    flex:1,
-   }, 
-  
-  body: {
-height:'90%',
-     alignItems: 'center',
-    justifyContent: 'center',
-    
-    width:"100%"
-  },
-});
+function SettingsScreen({ navigation }) {
+  return (
+  <Setting/>
+  );
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
