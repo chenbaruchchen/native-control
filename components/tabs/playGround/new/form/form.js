@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import {ScrollView, View,StyleSheet,Button} from 'react-native'
  import Section from './section'
  import saveFile  from '../../../../fileSystem/saveFile'
-
+import PopUp from '../list-shelonim/deleteModel'
  const Form = (props) => {
 
   const [ans,setAns]=useState([])
-
+  const [added,setAdded]=useState(null)
   function handleSave(data,name) {
 
     const file={
@@ -16,7 +16,7 @@ import {ScrollView, View,StyleSheet,Button} from 'react-native'
     //  const uri=`/tfasim/${name}/${data[0]}`
      const uri=`/tfasim/${name}&&${data[0]}`
      console.log(uri)
-saveFile(uri,file).then((res)=>console.log(res))
+saveFile(uri,file).then((res)=>console.log(res)).then(()=>setAdded(true))
 
    }
 
@@ -28,7 +28,7 @@ saveFile(uri,file).then((res)=>console.log(res))
 
     
     <ScrollView
-      style={{height:'80%',paddingBottom:80}}
+      style={{height:'78%'}}
     >
       <Section setAns={setAns} name={props.name} data={props.data}></Section>
 
@@ -38,7 +38,7 @@ saveFile(uri,file).then((res)=>console.log(res))
      onPress={()=>handleSave(ans,props.name)} title='form result '> </Button>
     </ScrollView>
  
-
+{added&&<PopUp setOpenModel={setAdded} openModel={added}/>}
     </View>
   )
 }

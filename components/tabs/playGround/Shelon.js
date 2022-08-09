@@ -5,6 +5,8 @@ import { StyleSheet, Text, View} from 'react-native';
 
  import Form from './new/form/form'
  import Old from './old/App';
+
+ import Header from './new/header-section'
 export default function Admin(props) {
     const [data,setData]=useState(null)
   useEffect(()=>{
@@ -16,15 +18,23 @@ readFile(uri).then((res)=>{
     
   }).catch(err=>console.log(err))
  },[])
-    return (
+ 
+ return (
         <View style={{width:'100%'}} >
 
             {/* {data&& <Text>{data} </Text>} */}
-   <Text>{props.shelon} </Text>
-   <View style={{marginTop:20}}>
+
+   {/* <Text>{props.shelon} </Text>
+   <Text onPress={()=>props.setShelon(null)}> close</Text> */}
+
+   {/* <View style={{marginTop:20}}>
+   <Text onPress={props.setShelon(null)}> close</Text>
+
 <FontAwesome onPress={()=>props.setOpenOld(true)} style={{marginLeft:'auto',marginRight:'auto'}} name="history" size={24} color="black" />
 <Text style={{marginLeft:'auto',marginRight:'auto'}} onPress={()=>props.setOpenOld(true)}> טפסים קודמים </Text>
-</View>
+</View> */}
+
+<Header setShelon={props.setShelon} name={props.shelon}/>
         {data&&<Form name={props.shelon} data={data}  />}  
  
          </View>

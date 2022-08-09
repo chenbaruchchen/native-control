@@ -8,12 +8,14 @@ import saveFile from '../../fileSystem/saveFile';
 import * as FileSystem from 'expo-file-system';
 
 import { Alert } from '../../uiComponents/alert';
- export default function getFromGoogleSheets(props) {
+  export default function getFromGoogleSheets(props) {
 
 
     const [data, setData] = useState(null); 
     const [name,setName]=useState('') 
     const [text,setText]=useState(null) 
+    const [save,setSave]=useState(null) 
+
      useEffect(()=>{
         if (data) {
             console.log(data)
@@ -48,19 +50,18 @@ import { Alert } from '../../uiComponents/alert';
             }
  
             function prepereForSave() {
-                const uri=  '/shelonim/'+name+Math.random()
-                 saveFile(uri,data) 
+                const uri=  '/shelonim/'+name
+                 saveFile(uri,data).then(res=>setSave(res))
             }
     return (<View>
  
 <InputUi setInput={setName}/>
 <Button onPress={getFromGoogleSheetsData} title='get from google sheets'></Button>
+ 
 
-
+ 
  {text&& <DisplayData name={name} data={data} prepereForSave={prepereForSave} />}
-
-
-    </View>
+     </View>
       );
 }
 

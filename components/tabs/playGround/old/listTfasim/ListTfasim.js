@@ -12,7 +12,9 @@ export default function Old(props) {
 
    useEffect(()=>{
     const uri='/tfasim'
-    readDir(uri).then((res)=>setTfasim(res))
+    readDir(uri).then((res)=>setTfasim(res)).then(()=>console.log(tfasim.length))
+     
+
    },[])
    
    function handleDalete(tofes) {
@@ -21,6 +23,15 @@ export default function Old(props) {
 
     deleteFile(uri).then(res=>console.log(res))
    }
+
+//    return (
+//     <View>
+//         <Text>רשימת טפסים</Text>
+//         {tfasim.map((tofes)=> <Text key={tofes}>1  </Text>)}
+//         {console.log(tfasim)}
+//         {/* <Text key="{tofes}">1  </Text> */}
+//     </View>
+//    )
 return <View  style={styles.container}>
  <Text>רשימת טפסים</Text>
  <Text>{ props.chosenTofes}</Text>

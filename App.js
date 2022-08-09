@@ -4,6 +4,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import { Ionicons } from '@expo/vector-icons';
+import * as eva from '@eva-design/eva';
+import { EvaIconsPack } from '@ui-kitten/eva-icons';
+
+import { ApplicationProvider, Layout,IconRegistry } from '@ui-kitten/components';
 
 import Home from './components/tabs/playGround/playGround'
 import Setting from './components/tabs/admin/admin'
@@ -21,7 +25,21 @@ function SettingsScreen({ navigation }) {
 
 const Tab = createBottomTabNavigator();
 
-export default function App() {
+export default () => (
+  <>
+  <IconRegistry icons={EvaIconsPack} />
+  <ApplicationProvider {...eva} theme={eva.light}>
+
+ <App />
+ 
+ 
+    
+  </ApplicationProvider>
+  </>
+ 
+);
+
+function App() {
   return (
     <NavigationContainer>
         
