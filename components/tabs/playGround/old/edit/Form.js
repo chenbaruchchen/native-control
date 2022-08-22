@@ -2,82 +2,71 @@ import { View,Text ,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity} from "r
  import InputStringShort from "./input-short";
  import Quatsion from './quatsion'
 import readFile from "../../../../fileSystem/readFile";
-import saveFile from "../../../../fileSystem/saveFile";
-
+ 
 import readDir from "../../../../fileSystem/readDir";
 
 import {useEffect, useState,createContext}from 'react'
- 
+import saveFile from "../../../../fileSystem/saveFile";
 import { Button } from "./Button";
+import { AntDesign } from '@expo/vector-icons'; 
 
 
-import Form from "./Form";
- export default function Old(props) {
-    const [tofes,setTofes]=useState(null)
-    const [shelon,setShelon]=useState(null)
-   
-     
- useEffect(()=>{
-    
+  export default function Old(props) {
+    const[update,setUpdate]=useState(false)
+ function saveTofes() {
+     if (props.tofes.name){
+        const uri=`/tfasim/${props.tofes.name}`
+        console.log(props.tofes)
+        saveFile(uri,props.tofes).then((res)=>console.log(res)).then(()=>setUpdate(true))
 
-    console.log(props.chosenTofes)
-    if(props.chosenTofes===undefined) return 
-
-    (async function getData() {
-        console.log('getData')
-
-        const uri='/tfasim/'+props.chosenTofes
-        
-        /// tofes - answers and name
-         
-            let res=await getTofes()
-            res=await getShelon()
-
-
-        
-       
-        
-        
- 
-        
-    })()
-
- },[props.chosenTofes])
-
- async function getShelon() {
-       //    / shelon - quatsion and name
-       if(!tofes) return false
-       const uriShelon='/shelonim/'+tofes.name
-       let shelonRes=await readFile(uriShelon)
-       shelonRes=JSON.parse(shelonRes)
-       setShelon(shelonRes.rows)
-       return true
+     }else{
+        console.log('false')
+     }
 
  }
-async function getTofes() {
-    const uri='/tfasim/'+props.chosenTofes
-    let tofesTemp=await readFile(uri)
-    tofesTemp=JSON.parse(tofesTemp)
-    setTofes(tofesTemp)
-     
-    return true
-}
- if(props.chosenTofes===undefined) return 
- 
-if (shelon&&tofes) {
-    return <Form setTofes={setTofes} shelon={shelon} tofes={tofes} />
-}else{
-    getShelon()
-    getTofes()
+
+ if (update) {
+    return<View  >
+<AntDesign style={{marginLeft:'auto',marginRight:'auto',marginTop:50}} name="checkcircle" size={45} color="green" />
+    </View> 
+ }
+    return (   
+        <View >
+         <Text>edit {props.tofes.name}  </Text>
+         
+       
+         <SafeAreaView style={styles.container}>
+              <ScrollView style={styles.scrollView}>
+          
+              <View style={styles.form}>
+
+              {props.shelon.map((q,index)=><Quatsion setTofes={props.setTofes} index={index} ans={props.tofes.data[index]}   key={index} q={q}/>)}
+
+        
+         </View>
+        
+              </ScrollView>
+              <View>
+
+              </View>
+
+              <TouchableOpacity style={styles.button} onPress={()=>saveTofes()}>
+    <Text style={{color:"white"}}>
+    save updates
+    </Text>
+</TouchableOpacity>
+            </SafeAreaView>
+
+
+      
+            </View>
+            )
+  
     
-}
-   
- 
- 
+    }
 
 
-return <Text>wait  </Text>
-}
+ 
 
 
  const styles=StyleSheet.create({
@@ -86,7 +75,6 @@ return <Text>wait  </Text>
         backgroundColor:'white',
         width:'100%',
         height:'92%',
-        maxHeight:'80%',
         // paddingTop: StatusBar.currentHeight,
        },
       scrollView: {
@@ -100,7 +88,6 @@ return <Text>wait  </Text>
     form : {
         width: "100%",
         // height: "min-content", /* 470px */
-        
         height:'auto',
         display: "flex",
         flexDirection: "column",
@@ -113,10 +100,13 @@ return <Text>wait  </Text>
         gap: 10,
       },
       button:{
+        display:'flex',
+        alignItems:'center',
          flexShrink: 0,
         width: 'auto',
         padding:15,
     margin:20,
+    marginHorizontal:'25%',
         height: 58,
         backgroundColor: "#28cdcf",
         overflow: "hidden",

@@ -1,5 +1,5 @@
 
-import { View,Text ,StyleSheet} from "react-native";
+import { View,Text ,StyleSheet,SafeAreaView,ScrollView,} from "react-native";
 import readDir from '../../../../fileSystem/readDir'
 
 import { AntDesign } from '@expo/vector-icons'; 
@@ -35,15 +35,24 @@ export default function Old(props) {
 return <View  style={styles.container}>
  <Text>רשימת טפסים</Text>
  <Text>{ props.chosenTofes}</Text>
- {tfasim.map((tofes)=>(<View onStartShouldSetResponder={()=>props.setChosenTofes(tofes)} key={tofes}  
- style={styles.item} >
-    <AntDesign onPress={()=>handleDalete(tofes)} style={{marginRight:35}} name="delete" size={24} color="black" />   
-      <Text  >{tofes}</Text>
-          
-      {/* onPress={deleteContainerFunction} */}
- </View>))}
+ <SafeAreaView >
+              <ScrollView style={{padding:30}}>
+              {tfasim.map((tofes)=>(<View onStartShouldSetResponder={()=>props.setChosenTofes(tofes)} key={tofes}  
 
-    </View>
+
+style={styles.item} >
+   {console.log(tfasim.length)}
+   <AntDesign onLongPress={()=>handleDalete(tofes)} style={{position:'absolute',left:20}} name="delete" size={24} color="black" />   
+     <Text  >{tofes}</Text>
+         
+     {/* onPress={deleteContainerFunction} */}
+</View>))}
+
+              </ScrollView>
+
+
+ </SafeAreaView >
+     </View>
 }
 
 const styles=StyleSheet.create({

@@ -44,9 +44,9 @@ export default function Old(props) {
 return <View style={styles.app} >
  <Text>excel</Text>
 
- {file&&<ShereButton file={file}/>}
+ {/* {file&&<ShereButton file={file}/>} */}
 
-<Button action={handleGanerateExcel}/>
+<Button style={styles.button} action={handleGanerateExcel}/>
      </View>
 }
  
@@ -57,7 +57,10 @@ const styles=StyleSheet.create({
         width:'100%',
         height:'100%',
         display:'flex',
-        backgroundColor:'#ffe'
+        justifyContent:'center',alignContent:'center',alignItems:'center'
+       
+    },button:{
+        position:'absolute',top:10,left:'auto',right:'auto',marginLeft:'auto',marginLeft:'auto'
     }
 })
 

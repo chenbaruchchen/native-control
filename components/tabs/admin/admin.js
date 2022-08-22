@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,SafeAreaView } from 'react-native';
 import GetFromGoogleSheets from './getFromGoogleSheets';
  import { useEffect, useState } from 'react';
  
@@ -16,14 +16,16 @@ export default function Admin(props) {
    
     switch (chosen) {
         case 'Download new quiz from Google sheets':
-            setRoute(<GetFromGoogleSheets setData={()=>setData}/>)
+            console.log(1)
+            setRoute(<GetFromGoogleSheets setData={setData}/>)
+
+            
             break;
 
             case 'new quiz from Google sheets':
-                setRoute(3)
+                setRoute(null)
                 break;
-        default:
-            setRoute(2)
+  
             break;
     }
 
@@ -32,16 +34,16 @@ export default function Admin(props) {
     if(!chosen) return <MenuGroupsShowcase setChosen={setChosen}/>
     else
 
+   
     return (
         
  
-        <View >
 
+<View>
     <Text onPress={()=>setChosen(null)}>close</Text>
-
-    
-      {route&&<Text>{route}</Text>}
-
-        </View>
+    {route!==null?<View style={{
+        display:'flex',justifyContent:'center',alignContent:'center' ,
+      }}>{route}</View>:<Text onPress={()=>setChosen(null)}>nussssll</Text>}
+     </View>
       );
 }

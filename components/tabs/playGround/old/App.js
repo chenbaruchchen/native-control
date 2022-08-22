@@ -4,7 +4,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons'; 
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
-import {useState}from 'react'
+import {useEffect, useState}from 'react'
 
 import Edit from './edit/edit'
 import ListTfasim from './listTfasim/ListTfasim'
@@ -16,41 +16,26 @@ export default function Old(props) {
      const [chosenTofes,setChosenTofes]=useState(null)
 
      const [openSideBar,setOpenSideBar]=useState(false)
+
+//      useEffect((chosenTofes)=>{
+// console.log(chosenTofes)
+//      },[])
      return (
         <View style={styles.container2}>
 
-{chosenTofes!==null&& <SideBar setOpenSideBar={setOpenSideBar} openSideBar={openSideBar}/>}
+{chosenTofes!==null&& <SideBar setChosenTofes={setChosenTofes} setToolTabContet={setToolTabContet} setOpenSideBar={setOpenSideBar} openSideBar={openSideBar}/>}
 
            
             <View style={styles.app}>
                 {chosenTofes===null&&<ListTfasim chosenTofes={chosenTofes} setChosenTofes={setChosenTofes}/>}
-                {toolTabContent==='edit'&&<Edit/>}
+                {toolTabContent==='edit'&&<Edit chosenTofes={chosenTofes}/>}
                 {toolTabContent==='excel'&&<Excel chosenTofes={chosenTofes}/>}
           
 
             </View>
         </View>
      )
-return <View style={styles.container}>
-    
- 
-    {/* if the tool bar open */}
- {toolBarSize&&<ToolsBar setToolTabContet={setToolTabContet} setToolBarSize={setToolBarSize}  style={styles.toolBar}/>} 
- {/* if the tool bar close */}
- {!toolBarSize&&<AntDesign onPress={()=> setToolBarSize(prev=>!prev)} style={{left:20,top:50, position:'absolute',zIndex:10}} name="minuscircleo" size={24} color="black" />}
- 
- {/* render content */}
- <View style={styles.content}>
- <Text>{ chosenTofes}</Text>
- {toolTabContent==='list'&&<ListTfasim chosenTofes={chosenTofes} setChosenTofes={setChosenTofes}/>}
-{toolTabContent==='edit'&&<Edit/>}
-{toolTabContent==='excel'&&<Excel chosenTofes={chosenTofes}/>}
 
-
-</View>
-
-
-    </View>
 }
 
 const styles=StyleSheet.create({
@@ -143,6 +128,18 @@ function SideBar(props) {
         </Pressable>
 
 
+        <Pressable onPress={()=>{
+    props.setOpenSideBar(false)
+      props.setChosenTofes(null)
+      }}>
+        <View   style={styles.sideBarListItem}>
+
+<Text
+>List</Text>
+<FontAwesome5  name="list-ul" size={24} color="black" />
+ 
+</View>
+        </Pressable>
 <Pressable onPress={()=>{
 props.setOpenSideBar(false)
   props.setToolTabContet('excel')

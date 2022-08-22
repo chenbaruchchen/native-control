@@ -32,7 +32,7 @@ import Form from "./Form";
          
             let res=await getTofes()
             res=await getShelon()
-
+ 
 
         
        
@@ -50,7 +50,7 @@ import Form from "./Form";
        const uriShelon='/shelonim/'+tofes.name
        let shelonRes=await readFile(uriShelon)
        shelonRes=JSON.parse(shelonRes)
-       setShelon(shelonRes.rows)
+        setShelon(shelonRes.rows)
        return true
 
  }
@@ -58,8 +58,8 @@ async function getTofes() {
     const uri='/tfasim/'+props.chosenTofes
     let tofesTemp=await readFile(uri)
     tofesTemp=JSON.parse(tofesTemp)
+  
     setTofes(tofesTemp)
-     
     return true
 }
  if(props.chosenTofes===undefined) return 
@@ -80,7 +80,7 @@ return <Text>wait  </Text>
 }
 
 
- const styles=StyleSheet.create({
+const styles=StyleSheet.create({
     container: {
         // flex: 1,
         backgroundColor:'white',

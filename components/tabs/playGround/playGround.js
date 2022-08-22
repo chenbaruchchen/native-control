@@ -8,7 +8,7 @@ import Old from './old/App';
 
 import ChoseTab from './ChoseTab'
 export default function Admin(props) {
-    const [chosenTab,setChosenTab]=useState(null)
+    const [chosenTab,setChosenTab]=useState('new')
     const [shelon,setShelon]=useState(null)
     const [openOld,setOpenOld]=useState(false)
 

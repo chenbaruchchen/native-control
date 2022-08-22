@@ -26,7 +26,7 @@ readFile(uri).then((res)=>{
          
 
 <Header setShelon={props.setShelon} name={props.shelon}/>
-        {data&&<Form setData={setData}name={props.shelon} data={data}  />}  
+        {data&&<Form name={props.shelon} data={data}  />}  
  
          </View>
       );

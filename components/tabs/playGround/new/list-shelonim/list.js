@@ -18,10 +18,13 @@ const data = new Array(8).fill({
 
  
     useEffect(()=>{
+
+       if(shelonim!==null)return 
+         
        readDir('/shelonim').then((res)=>{
             setShelonim(res)
        }).catch((err)=>console.error(err))
-   },[])
+   })
  
 const uiPopup=<Button onPress={()=>deleteFile(`/shelonim/${shelonToDelete}`)}>מחק את הטופס</Button>
 
@@ -74,7 +77,7 @@ const uiPopup=<Button onPress={()=>deleteFile(`/shelonim/${shelonToDelete}`)}>מ
     
   
   );
-if (shelonim) {
+if (true) {
     // console.log(shelonim.length)
     return (
         <>
@@ -82,26 +85,23 @@ if (shelonim) {
         בחר שאלון
        </Text>
 
- 
-        <List
-          style={styles.container}
-          data={shelonim}
-          renderItem={renderItem}
-        />
+ {
+  shelonim?<List
+  style={styles.container}
+  data={shelonim}
+  renderItem={renderItem}
+/>:<Text>קורא נתונים</Text>
+ }
+       
 
  
          </>
       ); 
 }
-  return (
+ 
 
-    <List
-      style={styles.container}
-      data={data}
-      renderItem={renderItem}
-    />
-    
-  );
+
+ return null
 };
 
 export default ListAccessoriesShowcase
