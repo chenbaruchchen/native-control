@@ -7,7 +7,7 @@ const MyComponent = (props) => {
 const [ans,setAns]=React.useState(props.ans)
  
 React.useEffect(()=>{
-   
+    
 props.setAns((prev)=>{
  
     let newAns=[...prev]

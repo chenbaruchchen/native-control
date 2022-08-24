@@ -1,4 +1,4 @@
-import { View,Text ,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity} from "react-native";
+import {FlatList, View,Text ,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity} from "react-native";
  import InputStringShort from "./input-short";
  import Quatsion from './quatsion'
 import readFile from "../../../../fileSystem/readFile";
@@ -14,7 +14,12 @@ import { AntDesign } from '@expo/vector-icons';
   export default function Old(props) {
     const[update,setUpdate]=useState(false)
     const[ans,setAns]=useState([])
-
+    // const[index,setIndex]=useState(0)
+useEffect(()=>{
+console.log(ans)
+console.log("ans")
+},[ans])
+    
  function saveTofes() {
      if (props.name){
          
@@ -23,7 +28,7 @@ import { AntDesign } from '@expo/vector-icons';
         const uri=`/tfasim/${props.name}&&${ans[0]}`
 
         let tofes={name:props.name,data:ans}
-         
+         console.log(tofes)
    saveFile(uri,tofes).then((res)=>console.log(res)).then(()=>setUpdate(true))
 
 
@@ -44,16 +49,39 @@ import { AntDesign } from '@expo/vector-icons';
          
        
          <SafeAreaView style={styles.container}>
-              <ScrollView style={styles.scrollView}>
+
+
+
+              {/* <ScrollView style={styles.scrollView}> */}
           
-              <View style={styles.form}>
+              {/* <View style={styles.form}> */}
 
-              {props.data.map((q,index)=><Quatsion setAns={setAns} tofes={props.data} setTofes={props.setData} index={index}    key={index} q={q}/>)}
+              {/* {props.data.map((q,index)=><Quatsion setAns={setAns} tofes={props.data} setTofes={props.setData} index={index}    key={index} q={q}/>)} */}
 
+              <FlatList
+              style={{
+                marginLeft:'auto',
+                marginRight:'auto',
+                 width:'100%',
+                 flex:7
+              }
+                
+
+              }
+ data={props.data}
+ 
+ renderItem={({item,index}) => {
+
+
+ 
+   return( <Quatsion setAns={setAns} tofes={props.data} setTofes={props.setData} index={index}    q={item}/>)
+  
+  
+  }}
+/>
+         {/* </View> */}
         
-         </View>
-        
-              </ScrollView>
+              {/* </ScrollView> */}
               
 
               <TouchableOpacity style={styles.button} onPress={()=>saveTofes()}>

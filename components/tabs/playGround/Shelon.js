@@ -1,3 +1,5 @@
+      // "image": "./assets/splash.png",
+
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View} from 'react-native';
  import readFile from '../../fileSystem/readFile';

@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View,Button, SafeAreaView,  ScrollView ,TextInput,TouchableOpacity} from 'react-native';
+import {FlatList, StyleSheet, Text, View,Button, SafeAreaView,  ScrollView ,TextInput,TouchableOpacity} from 'react-native';
 import React, { useState,useEffect } from "react";
 import Papa from "papaparse";
 
@@ -11,13 +11,17 @@ import { Alert } from '../../uiComponents/alert';
 
 import { AntDesign } from '@expo/vector-icons'; 
 
-  export default function getFromGoogleSheets(props) {
+const container = React.createRef(null);
+
+   export default function getFromGoogleSheets(props) {
 
 
     const [data, setData] = useState(null); 
     const [name,setName]=useState('') 
     const [text,setText]=useState(null) 
     const [save,setSave]=useState(null) 
+    const [index,setIndex]=useState(0) 
+
 
      useEffect(()=>{
         if (data) {
@@ -34,8 +38,7 @@ import { AntDesign } from '@expo/vector-icons';
     const sheetName = name;
     const query = encodeURIComponent('Select *')
     const url = `${base}&sheet=${sheetName}&tq=${query}`  
-
-            function getFromGoogleSheetsData(params) {
+             function getFromGoogleSheetsData(params) {
 
                 console.log(name)
 
@@ -88,15 +91,15 @@ function DisplayData(props) {
         {/* <Text>{props.data.row}</Text> */}
         <Text> השאלון </Text>
 
-<ScrollView >
+
+        <FlatList
+ data={props.data.rows}
+ renderItem={({item}) => <View  style={styles.displayQuatsion}>
+ <Text Text>{item.c[0].v}</Text>
+ </View>}
+/>
  
-{props.data.rows?.map((q,index)=>(<View  key={index} style={styles.displayQuatsion}>
-    <Text Text>{q.c[0].v}</Text>
-    </View>))}
-
-
-</ScrollView>
-
+ 
  
 <TouchableOpacity style={styles.button} onPress={props.prepereForSave}>
     <Text style={{color:"white"}}>

@@ -37,12 +37,12 @@ export async function createExcelFromTofesAndShelon(tofes,shelon,name){
     const data=getDataAsJson(tofes,shelon)
      var ws = XLSX.utils.json_to_sheet(data);
     var wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Cities");
+    XLSX.utils.book_append_sheet(wb, ws, "ביקורת");
     const wbout = XLSX.write(wb, {
       type: 'base64',
       bookType: "xlsx"
     });
-    const uri = FileSystem.cacheDirectory + 'cities.xlsx';
+    const uri = FileSystem.cacheDirectory + 'HR-ontrols.xlsx';
      await FileSystem.writeAsStringAsync(uri, wbout, {
       encoding: FileSystem.EncodingType.Base64
     });

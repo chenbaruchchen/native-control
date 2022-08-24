@@ -11,6 +11,8 @@ import { ApplicationProvider, Layout,IconRegistry } from '@ui-kitten/components'
 
 import Home from './components/tabs/playGround/playGround'
 import Setting from './components/tabs/admin/admin'
+
+import StartDb from './scripts/start-db'
 function HomeScreen({ navigation }) {
   return (<Home/>
      
@@ -25,19 +27,29 @@ function SettingsScreen({ navigation }) {
 
 const Tab = createBottomTabNavigator();
 
-export default () => (
-  <>
-  <IconRegistry icons={EvaIconsPack} />
-  <ApplicationProvider {...eva} theme={eva.light}>
+export default function Main () {
+   React.useEffect(()=>{
+    StartDb().then(()=>setStart(true))
+  },[])
 
- <App />
- 
+   
+  return(
+    <>
+    <IconRegistry icons={EvaIconsPack} />
+    <ApplicationProvider {...eva} theme={eva.light}>
+  
+   <App />
+   
+   
+      
+    </ApplicationProvider>
+    </>
+    )
+}
  
     
-  </ApplicationProvider>
-  </>
- 
-);
+
+
 
 function App() {
   return (

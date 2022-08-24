@@ -1,4 +1,4 @@
-import { View,Text ,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity} from "react-native";
+import {FlatList, View,Text ,StyleSheet,SafeAreaView,ScrollView,TouchableOpacity} from "react-native";
  import InputStringShort from "./input-short";
  import Quatsion from './quatsion'
 import readFile from "../../../../fileSystem/readFile";
@@ -13,9 +13,12 @@ import { AntDesign } from '@expo/vector-icons';
 
   export default function Old(props) {
     const[update,setUpdate]=useState(false)
+ 
  function saveTofes() {
      if (props.tofes.name){
-        const uri=`/tfasim/${props.tofes.name}`
+        const uri=`/tfasim/${props.tofes.name}&&${props.tofes.data[0]}`
+
+ 
         console.log(props.tofes)
         saveFile(uri,props.tofes).then((res)=>console.log(res)).then(()=>setUpdate(true))
 
@@ -36,16 +39,23 @@ import { AntDesign } from '@expo/vector-icons';
          
        
          <SafeAreaView style={styles.container}>
-              <ScrollView style={styles.scrollView}>
-          
-              <View style={styles.form}>
+         <FlatList
+              style={{
+                marginLeft:'auto',
+                marginRight:'auto',
+                 width:'100%',
+                 flex:7
+              }
+                
 
-              {props.shelon.map((q,index)=><Quatsion setTofes={props.setTofes} index={index} ans={props.tofes.data[index]}   key={index} q={q}/>)}
-
-        
-         </View>
-        
-              </ScrollView>
+              }
+ data={props.shelon}
+ 
+ renderItem={({item,index}) => {
+   
+  return( <Quatsion setTofes={props.setTofes} index={index} ans={props.tofes.data[index]}   q={item}/>)
+   }}
+/>
               <View>
 
               </View>
@@ -116,3 +126,4 @@ import { AntDesign } from '@expo/vector-icons';
       }
 
 })
+

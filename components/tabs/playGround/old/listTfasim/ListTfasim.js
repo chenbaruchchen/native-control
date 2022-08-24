@@ -18,6 +18,7 @@ export default function Old(props) {
    },[])
    
    function handleDalete(tofes) {
+    console.log('try')
     let uri=`/tfasim/${tofes}`
    
 
