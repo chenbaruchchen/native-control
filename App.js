@@ -27,10 +27,21 @@ function SettingsScreen({ navigation }) {
 
 const Tab = createBottomTabNavigator();
 
-export default function Main () {
-   React.useEffect(()=>{
+export default function Wraper() {
+  const [start,setStart]=React.useState(null)
+
+  React.useEffect(()=>{
     StartDb().then(()=>setStart(true))
   },[])
+
+  if (start) {
+    
+    return <Main/>
+  }
+  return null
+}
+ function Main () {
+  
 
    
   return(
