@@ -13,6 +13,8 @@ import Home from './components/tabs/playGround/playGround'
 import Setting from './components/tabs/admin/admin'
 
 import StartDb from './scripts/start-db'
+
+import Cheackers from './cheackers'
 function HomeScreen({ navigation }) {
   return (<Home/>
      
@@ -29,16 +31,27 @@ const Tab = createBottomTabNavigator();
 
 export default function Wraper() {
   const [start,setStart]=React.useState(null)
+  const [err,setErr]=React.useState(null)
 
-  React.useEffect(()=>{
-    StartDb().then(()=>setStart(true))
-  },[])
+  React.useEffect((res)=>{
+    try {
+      StartDb().then((res)=>setStart(res))
+    } catch (error) {
+      console.log(error)
+      setErr(error.toString())
+    }
 
-  if (start) {
-    
-    return <Main/>
+   },[])
+
+  if (err===null) {
+    return<>
+<Cheackers/>
+<Main/>
+ 
+    </>
+    // return <Main/>
   }
-  return null
+  return <Cheackers/>
 }
  function Main () {
   

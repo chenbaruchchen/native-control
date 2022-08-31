@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "HR-controls",
-    "slug": "bikorot23",
+    "slug": "bikorot38",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/Appicons/playstore.png",
@@ -21,11 +21,12 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions":["READ_EXTERNAL_STORAGE","WRITE_EXTERNAL_STORAGE","INTERNET"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/Appicons/playstore.png",
         "backgroundColor": "#ffff"
       },
-      "package": "com.chenbaruch.AwesomeProject"
+      "package": "com.chenbaruch.bikorot"
     },
     "web": {
       "favicon": "./assets/favicon.png"
