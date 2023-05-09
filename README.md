@@ -1,6 +1,8 @@
 # HR-controls native
 # <Your-Project-Title>
 
+> for running demo as apk contact me
+
 ## Description
 
 > this project porpuse is to replace HR-controls in of-line places
